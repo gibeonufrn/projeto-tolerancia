@@ -9,6 +9,15 @@
 | **Entrega**           | Tag BASELINE no repositório e evidências dos testes.                                    |
 | **Restrição central** | Nenhum mecanismo de tolerância a falhas nesta parte. O sistema faz a compra, registra o que aconteceu e falha quando tem de falhar. |
 
+> **Primeira de duas partes subsequentes.** Esta parte constrói o sistema sem nenhuma proteção, com as dependências sadias. A [Parte 2](parte2-especificacao.md) parte da versão entregue aqui (tag BASELINE): começa ligando a injeção de falhas nas dependências e medindo o estrago, e depois acrescenta ao IMDTravel a tolerância a falhas.
+
+**Documentos desta parte**
+
+| Documento | Conteúdo |
+|---|---|
+| [Como executar](../EXECUCAO.md) | O que instalar, como subir e parar os serviços, o catálogo e a configuração. |
+| [Como testar](../TESTES.md) | Testes manuais com `curl`, o script `testes.sh` e os testes unitários. |
+
 
 # 1. O sistema
 O sistema simula a venda de passagens aéreas. Um agente externo pede uma compra ao IMDTravel, que orquestra quatro chamadas: consulta o voo, obtém a taxa de câmbio, efetiva a venda e credita o bônus de fidelidade. Cada serviço é um container, e todos sobem com um único comando.
