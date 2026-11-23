@@ -1,6 +1,6 @@
 # Especificação do Projeto (Tolerância a Falhas)
 
-**Unidade 2 – Parte 2 · Tolerância a falhas no IMDTravel, sem replicação**
+**Unidade 2 – Parte 2 · Tolerância a falhas no IMDTravel**
 
 |                         |                                                                                                                                              |
 |-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
