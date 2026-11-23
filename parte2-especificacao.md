@@ -5,23 +5,32 @@
 |                         |                                                                                                                                              |
 |-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | **Objetivo**            | Implementar no IMDTravel as estratégias de tolerância a falhas que o tornam resiliente às falhas que vão acontecer nos serviços de que ele depende. |
-| **O que se implementa** | **Só o IMDTravel.** AirlinesHub, Exchange e Fidelity são os mesmos da Parte 1: caixas-pretas, com o mesmo contrato e com a injeção de falhas da etapa 2. |
+| **O que se implementa** | **Só o IMDTravel.** AirlinesHub, Exchange e Fidelity são os mesmos da Parte 1: caixas-pretas, com o mesmo contrato e com a injeção de falhas da parte 2. |
 | **Equipe**              | A mesma da Parte 1. Mínimo 2, máximo 3 pessoas.                                                                                              |
 | **Pré-requisito**       | A tag BASELINE e as evidências da execução da Parte 1 (o sistema sob as falhas injetadas, sem nenhuma proteção).                                |
-| **Entrega**             | Tag FAULT-TOLERANT no repositório, roteiro de experimentos executável e novas evidências.                                       |
+| **Entrega**             | Tag FAULT-TOLERANT no repositório, testes que demonstram cada propriedade e novas evidências.                                   |
 | **Restrição central**   | Nenhum serviço é replicado. Cada serviço continua sendo exatamente um container, e nenhum serviço de dependência é alterado.                 |
+
+> **Segunda de duas partes subsequentes.** Esta parte começa onde a [Parte 1](parte1-especificacao.md) terminou: parte do IMDTravel da tag BASELINE e das medições feitas com as falhas injetadas, e o torna resiliente a essas falhas.
+
+**Documentos desta parte**
+
+| Documento | Conteúdo |
+|---|---|
+| Esta especificação | O que o IMDTravel precisa garantir sob falha, as restrições e a entrega. |
+| [Injeção de falhas](../FALHAS.md) | Herdado da Parte 1: o modelo de falhas das dependências, que esta parte passa a tolerar. |
 
 > **Leitura de apoio.** *Patterns for Fault Tolerant Software* (HANMER, Wiley, 2007), capítulos 5, 6 e 7, vistos nas aulas 07, 08 e 09.
 
 # 1. O que esta parte pede
 
-Na Parte 1, o IMDTravel foi construído sob uma hipótese que toda dependência responde, responde a tempo e responde certo. Na etapa 2, as dependências passam a falhar de propósito ([Injeção de falhas](../FALHAS.md)).
+Na Parte 1, o IMDTravel foi construído sob uma hipótese que toda dependência responde, responde a tempo e responde certo. Na Parte 2, as dependências passaram a falhar de propósito ([Injeção de falhas](../FALHAS.md)).
 
-**Nesta parte, a equipe deve implementay no IMDTravel as estratégias de tolerância a falhas que tornam o sistema resiliente a essas falhas.** As falhas continuam acontecendo nos outros serviços, do mesmo jeito e com a mesma configuração. O que muda é o IMDTravel.
+**Nesta parte, a equipe deve implementar no IMDTravel as estratégias de tolerância a falhas que tornam o sistema resiliente a essas falhas.** As falhas continuam acontecendo nos outros serviços, do mesmo jeito e com a mesma configuração. O que muda é o IMDTravel.
 
-Esta especificação diz **o que** o IMDTravel precisa garantir (seção 4), e não como. Escolher as estratégias, combiná-las e justificar os parâmetros é o trabalho da equipe. Cada estratégia adotada é nomeada no README, com o padrão do catálogo de onde ela vem, o lugar no código e o experimento que a demonstra (seção 8).
+Esta especificação diz **o que** o IMDTravel precisa garantir (seção 4), e não como. Escolher as estratégias, combiná-las e justificar os parâmetros é o trabalho da equipe. Cada estratégia adotada é nomeada no README, com o padrão do catálogo de onde ela vem, o lugar no código e o teste que a demonstra (seção 6).
 
-> O entregável desta parte não é “o sistema funciona”. É “o sistema continua útil enquanto as dependências falha, de forma verificável”. Um IMDTravel que passa no caminho feliz e trava na primeira falha injetada vale zero aqui, mesmo que o código esteja limpo.
+> O entregável desta parte não é “o sistema funciona”. É “o sistema continua útil enquanto as dependências falham, de forma verificável”. Um IMDTravel que passa no caminho feliz e trava na primeira falha injetada vale zero aqui, mesmo que o código esteja limpo.
 
 # 2. Restrições de escopo
 
@@ -92,7 +101,7 @@ As falhas são descritas em [Injeção de falhas](../FALHAS.md). Cada endpoint a
 
 # 4. O que o IMDTravel precisa garantir
 
-As propriedades abaixo são obrigatórias. Cada uma é verificada por pelo menos um experimento da seção 7.
+As propriedades abaixo são obrigatórias. Cada uma precisa ser demonstrada por pelo menos um teste, indicado na tabela de rastreabilidade (seção 6).
 
 | **Nº**  | **Propriedade**                         | **O que precisa valer, com qualquer combinação das falhas da seção 3**                                                                                                     |
 |---------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -113,13 +122,13 @@ A resposta da requisição 0 deixa de ser apenas sucesso ou fracasso. Os campos 
 
 
 
-# 8. Forma de entrega
+# 6. Forma de entrega
 
 - Todo o código, os Dockerfiles e o docker-compose.yml no mesmo repositório da parte 1 no GitHub.
 
 - Tag FAULT-TOLERANT marcando esta versão. A tag BASELINE precisa continuar existindo e funcionando, porque a comparação futura depende dela.
 
-- README com: como subir, como rodar os experimentos, os valores adotados para todos os parâmetros e a justificativa de cada um, e a tabela de rastreabilidade descrita abaixo.
+- README com: como subir, como rodar os testes que demonstram as propriedades, os valores adotados para todos os parâmetros e a justificativa de cada um, e a tabela de rastreabilidade descrita abaixo.
 
 A tabela de rastreabilidade do README liga cada propriedade (falha tolerada) às estratégias adotadas, ao código e à evidência. 
 
