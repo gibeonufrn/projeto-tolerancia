@@ -44,6 +44,12 @@ DIA="2026-12-05"
 
 cd "$(dirname "$0")"
 
+# Numa pasta com só o compose do Docker Hub (sem docker-compose.yml), usa ele.
+if [ -z "${COMPOSE_FILE:-}" ] && [ ! -f docker-compose.yml ] && [ ! -f compose.yaml ] \
+        && [ -f docker-compose.hub.yml ]; then
+    export COMPOSE_FILE=docker-compose.hub.yml
+fi
+
 uso() { sed -n '3,35p' "$0" | sed 's/^# \{0,1\}//'; exit "${1:-0}"; }
 
 for dep in docker curl jq; do
