@@ -1,7 +1,7 @@
 # IMDTravel — Parte 1 (BASELINE), usando as imagens publicadas no Docker Hub.
 #
 # Para quem só quer rodar o sistema:
-#   1. baixe só este arquivo numa pasta vazia, com o nome docker-compose.yml
+#   1. baixe só este arquivo numa pasta vazia
 #   2. docker compose -f docker-compose.hub.yml up -d --wait
 #   3. curl http://localhost:8080/health
 #
