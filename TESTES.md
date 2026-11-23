@@ -7,7 +7,6 @@ Três formas de conferir que o sistema faz o que a
 |---|---|---|
 | [Testes manuais com `curl`](#1-testes-manuais-com-curl) | Entender cada serviço, uma requisição por vez | — |
 | [`testes.sh`](#2-o-script-testessh) | Verificar o sistema inteiro, de fora, com um comando | ~10 s |
-| [Testes unitários](#3-testes-unitários) | Verificar a lógica de cada serviço, sem subir containers | ~1 min |
 
 Todas partem do sistema no ar. Para instalar o ambiente e subir os serviços, veja
 [Como executar](EXECUCAO.md).
@@ -216,19 +215,3 @@ antes de testar e diz qual projeto está no ar e onde ele foi subido.
 | `nenhum par com assento livre — rode com --reiniciar` | O catálogo inteiro foi vendido: `./testes.sh --reiniciar`. |
 | A seção 7 parece travada | É esperado: com o Fidelity parado, a compra pode levar mais de dois minutos para dar 500 (não há timeout na Parte 1). O script espera até 10 minutos. |
 
----
-
-## 3. Testes unitários
-
-Rodam sem subir containers. O projeto usa Java 21; se a sua máquina tiver outra versão,
-rode dentro de um container Maven:
-
-```
-docker run --rm -v "$PWD":/src -v imdtravel-m2:/root/.m2 -w /src \
-       maven:3.9-eclipse-temurin-21 mvn -B test
-```
-
-Com Java 21 instalado, basta `mvn test`. A mesma execução roda também os testes da
-injeção de falhas, descritos em [Testes da etapa 2](TESTES-FALHAS.md#3-testes-unitários).
-
----

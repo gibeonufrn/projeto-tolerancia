@@ -38,7 +38,9 @@ descuido, é o requisito! A Parte 1 é feita em duas etapas:
 | **1. A versão base** | O sistema funcionando, com as dependências sempre sadias. | [Especificação](docs/parte1-especificacao.md) · [Como executar](EXECUCAO.md) · [Como testar](TESTES.md) |
 | **2. Injeção de falhas** | As dependências passam a falhar de propósito, e se observa o estrago. | [Injeção de falhas](FALHAS.md) · [Testes da etapa 2](TESTES-FALHAS.md) |
 
-A **Parte 2** acrescenta ao IMDTravel os mecanismos que toleram as falhas da etapa 2.
+Na **Parte 2**, a equipe implementa no IMDTravel as estratégias de tolerância a falhas que o
+tornam resiliente às falhas da etapa 2, que continuam acontecendo nos outros serviços
+([especificação](docs/parte2-especificacao.md)).
 
 ### Etapa 1 — a versão base
 
@@ -78,4 +80,4 @@ valor absurdo, bônus perdidos. Esses números são a base de comparação da Pa
 | [Injeção de falhas](FALHAS.md) | Etapa 2. O modelo de falhas: os tipos, o que cada um faz, como ligar e como ver no log. |
 | [Testes da etapa 2](TESTES-FALHAS.md) | Etapa 2. O script `cenario.sh`, testes manuais de cada falha e os testes unitários da injeção. |
 | [Plano da injeção de falhas](docs/injecao-falhas-plano.md) | Etapa 2. As decisões de projeto e os detalhes de implementação. |
-| [Especificação da Parte 2](docs/parte2-especificacao.md) | Requisitos: em construção. |
+| [Especificação da Parte 2](docs/parte2-especificacao.md) | Parte 2. As estratégias de tolerância a falhas que a equipe implementa no IMDTravel, os experimentos e a entrega. |
