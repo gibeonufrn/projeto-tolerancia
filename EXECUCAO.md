@@ -78,6 +78,10 @@ Dentro de um clone do repositório, o equivalente é:
 docker compose -f docker-compose.hub.yml up -d --wait
 ```
 
+As imagens usadas por padrão têm a tag `parte2`: são as da [Parte 2](README.md#parte-2--falhas-e-tolerância-a-falhas),
+com a injeção de falhas desligada, e se comportam como as da Parte 1. Para usar exatamente
+as imagens da Parte 1: `IMAGE_TAG=baseline docker compose -f docker-compose.hub.yml up -d --wait`.
+
 ### Conferir que subiu
 
 ```

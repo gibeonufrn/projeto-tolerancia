@@ -39,7 +39,7 @@ Esta especificação diz **o que** o IMDTravel precisa garantir (seção 4), e n
 
 ## 2.1 O que é obrigatório
 
-- **Só o IMDTravel muda.** Os três serviços de dependência são usados como estão, pelas imagens publicadas. A equipe não altera o código, o contrato nem a configuração de falha deles.
+- **Só o IMDTravel muda.** Os três serviços de dependência são usados como estão, pelas imagens publicadas com a tag `parte2` — o padrão do `docker-compose.yml` e do `docker-compose.hub.yml`. A equipe não altera o código, o contrato nem a configuração de falha deles.
 
 - Um container por serviço. IMDTravel, AirlinesHub, Exchange e Fidelity: quatro containers, um de cada.
 

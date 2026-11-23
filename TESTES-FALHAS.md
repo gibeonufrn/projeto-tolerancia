@@ -12,6 +12,10 @@ o `./testes.sh` passa inteiro.
 |---|---|---|
 | [`cenario.sh`](#1-o-script-cenariosh) | Ver o estrago de cada falha, comparado com o cenário normal | ~30 s por cenário |
 
+**Imagens:** as dependências precisam ser as da tag `parte2`, o padrão dos arquivos de
+compose. Com as imagens `baseline`, as variáveis `FAULT_*` são ignoradas e nenhuma falha
+acontece.
+
 **Requisitos:** os mesmos da Parte 1: `docker compose`, `curl` e `jq` (veja
 [o que instalar](EXECUCAO.md#1-o-que-instalar)).
 

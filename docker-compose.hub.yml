@@ -8,7 +8,11 @@
 # Dentro do repositório: docker compose -f docker-compose.hub.yml up -d --wait
 #
 # Imagens para linux/amd64 e linux/arm64 — rodam também no Windows (Docker Desktop
-# com WSL 2) e em Macs Apple Silicon. Para outra versão: IMAGE_TAG=... docker compose up
+# com WSL 2) e em Macs Apple Silicon.
+#
+# Tag padrão: parte2 — as dependências com a injeção de falhas (FAULT_*, desligada por
+# padrão). Sem nenhuma FAULT_* ligada, elas se comportam como as da Parte 1.
+# Para as imagens da Parte 1: IMAGE_TAG=baseline docker compose -f docker-compose.hub.yml up -d
 
 x-healthcheck: &healthcheck
   test: ["CMD-SHELL", "curl -fsS http://localhost:$${PORT}/health"]
@@ -19,7 +23,7 @@ x-healthcheck: &healthcheck
 
 services:
   airlineshub:
-    image: gibeonufrn/imdtravel-airlineshub:${IMAGE_TAG:-baseline}
+    image: gibeonufrn/imdtravel-airlineshub:${IMAGE_TAG:-parte2}
     environment:
       PORT: 8080
       CATALOG_FLIGHTS: ${CATALOG_FLIGHTS:-IMD100,IMD200,IMD300}
@@ -39,7 +43,7 @@ services:
     healthcheck: *healthcheck
 
   exchange:
-    image: gibeonufrn/imdtravel-exchange:${IMAGE_TAG:-baseline}
+    image: gibeonufrn/imdtravel-exchange:${IMAGE_TAG:-parte2}
     environment:
       PORT: 8080
       EXCHANGE_INITIAL_RATE: ${EXCHANGE_INITIAL_RATE:-5.50}
@@ -53,7 +57,7 @@ services:
     healthcheck: *healthcheck
 
   fidelity:
-    image: gibeonufrn/imdtravel-fidelity:${IMAGE_TAG:-baseline}
+    image: gibeonufrn/imdtravel-fidelity:${IMAGE_TAG:-parte2}
     environment:
       PORT: 8080
       # Injeção de falhas. Tipo fixo: /bonus = Crash.
@@ -62,7 +66,7 @@ services:
     healthcheck: *healthcheck
 
   imdtravel:
-    image: gibeonufrn/imdtravel-imdtravel:${IMAGE_TAG:-baseline}
+    image: gibeonufrn/imdtravel-imdtravel:${IMAGE_TAG:-parte2}
     environment:
       PORT: 8080
       SALES_DIR: /data

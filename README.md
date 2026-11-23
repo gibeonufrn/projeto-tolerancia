@@ -102,6 +102,28 @@ elas, e demonstra com testes que os números do ponto de partida melhoraram.
 A versão entregue fica marcada com a tag **`FAULT-TOLERANT`**. A tag `BASELINE` precisa
 continuar existindo e funcionando, porque a comparação depende dela.
 
+**As imagens da Parte 2: tag `parte2`.** As dependências com a injeção de falhas estão
+publicadas no Docker Hub com a tag `parte2`, que é o padrão dos dois arquivos de compose
+deste repositório. Para subir o sistema já com elas:
+
+```
+docker compose -f docker-compose.hub.yml pull
+docker compose -f docker-compose.hub.yml up -d --wait
+```
+
+No compose da sua equipe, use as mesmas imagens e declare as oito variáveis `FAULT_*`, com
+padrão `0`, como no [`docker-compose.hub.yml`](docker-compose.hub.yml):
+
+| Serviço | Imagem | Variáveis de falha |
+|---|---|---|
+| AirlinesHub | `gibeonufrn/imdtravel-airlineshub:parte2` | `FAULT_FLIGHT_P`, `FAULT_FLIGHT_TTL_SEC`, `FAULT_SELL_P`, `FAULT_SELL_TTL_SEC` |
+| Exchange | `gibeonufrn/imdtravel-exchange:parte2` | `FAULT_CONVERT_P`, `FAULT_CONVERT_TTL_SEC` |
+| Fidelity | `gibeonufrn/imdtravel-fidelity:parte2` | `FAULT_BONUS_P`, `FAULT_BONUS_TTL_SEC` |
+
+As imagens `baseline` são as da Parte 1 e **não** têm a injeção: com elas, as variáveis
+`FAULT_*` são ignoradas e nenhuma falha acontece. Com todas as `FAULT_*` em `0`, as imagens
+`parte2` se comportam exatamente como as `baseline`.
+
 **Documentos da Parte 2:**
 
 | Documento | Conteúdo |
