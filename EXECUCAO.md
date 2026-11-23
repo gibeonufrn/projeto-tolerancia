@@ -133,7 +133,7 @@ Termina com `Resumo: N passaram, 0 falharam`. O guia completo — testes manuais
 o que cada seção do `testes.sh` verifica, como ler uma falha, variáveis de ambiente e testes
 unitários — está em **[Como testar](TESTES.md)**.
 
-Para a etapa 2, com falhas injetadas: [Testes da etapa 2](TESTES-FALHAS.md).
+Para a Parte 2, com falhas injetadas: [Testes com falhas](TESTES-FALHAS.md).
 
 ---
 
@@ -168,8 +168,8 @@ mesmo valor.
 | `IMDTRAVEL_HOST_PORT` | `8080` | porta do IMDTravel no seu computador |
 
 O `docker-compose.yml` também traz as variáveis `FAULT_*`, todas com padrão `0`: são a
-injeção de falhas da etapa 2, descrita em [Injeção de falhas](FALHAS.md). Com os padrões,
-o sistema é o da etapa 1.
+injeção de falhas da Parte 2, descrita em [Injeção de falhas](FALHAS.md). Com os padrões,
+não há falha nenhuma, como pede a Parte 1.
 
 ---
 
@@ -179,7 +179,7 @@ o sistema é o da etapa 1.
 |---|---|
 | [`docker-compose.hub.yml`](docker-compose.hub.yml) | Sobe o sistema com as imagens do Docker Hub |
 | [`testes.sh`](testes.sh) | Verificação funcional |
-| [`cenario.sh`](cenario.sh) | Etapa 2: observação de um cenário normal ou de uma das quatro falhas |
+| [`cenario.sh`](cenario.sh) | Parte 2: observação de um cenário normal ou de uma das quatro falhas |
 | [`docs/`](docs/) | Especificações e figuras |
 
 ---

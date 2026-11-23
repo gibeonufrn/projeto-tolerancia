@@ -9,16 +9,14 @@
 | **Entrega**           | Tag BASELINE no repositório e evidências dos testes.                                    |
 | **Restrição central** | Nenhum mecanismo de tolerância a falhas nesta parte. O sistema faz a compra, registra o que aconteceu e falha quando tem de falhar. |
 
-> **Primeira de duas partes subsequentes.** Esta parte constrói o sistema sem proteção e mede o estrago das falhas. A [Parte 2](parte2-especificacao.md) parte da versão entregue aqui (tag BASELINE) e acrescenta ao IMDTravel a tolerância a falhas.
+> **Primeira de duas partes subsequentes.** Esta parte constrói o sistema sem nenhuma proteção, com as dependências sadias. A [Parte 2](parte2-especificacao.md) parte da versão entregue aqui (tag BASELINE): começa ligando a injeção de falhas nas dependências e medindo o estrago, e depois acrescenta ao IMDTravel a tolerância a falhas.
 
 **Documentos desta parte**
 
-| Etapa | Documento | Conteúdo |
-|---|---|---|
-| 1 · o sistema funcionando | [Como executar](../EXECUCAO.md) | O que instalar, como subir e parar os serviços, o catálogo e a configuração. |
-| 1 · o sistema funcionando | [Como testar](../TESTES.md) | Testes manuais com `curl`, o script `testes.sh` e os testes unitários. |
-| 2 · injeção de falhas | [Injeção de falhas](../FALHAS.md) | O modelo de falhas das dependências: os tipos, como ligar e como ver no log. |
-| 2 · injeção de falhas | [Testes da etapa 2](../TESTES-FALHAS.md) | O script `cenario.sh` e os testes de cada falha. |
+| Documento | Conteúdo |
+|---|---|
+| [Como executar](../EXECUCAO.md) | O que instalar, como subir e parar os serviços, o catálogo e a configuração. |
+| [Como testar](../TESTES.md) | Testes manuais com `curl`, o script `testes.sh` e os testes unitários. |
 
 
 # 1. O sistema

@@ -1,16 +1,19 @@
-# IMDTravel — Etapa 2: injeção de falhas
+# IMDTravel — Parte 2: injeção de falhas
 
-Na [etapa 1](README.md#etapa-1--a-versão-base) o sistema foi construído e observado com as
-três dependências sempre sadias. Nesta etapa, as dependências passam a **falhar de propósito**:
-cada uma traz um modelo de falhas que se liga na subida dos containers. O objetivo é ver,
-com números e com o log, o estrago que cada falha causa num IMDTravel **sem nenhuma
-proteção**.
+Na [Parte 1](README.md#parte-1--a-versão-base) o sistema foi construído e observado com as
+três dependências sempre sadias. A [Parte 2](docs/parte2-especificacao.md) começa aqui: as
+dependências passam a **falhar de propósito**. Cada uma traz um modelo de falhas que se liga
+na subida dos containers.
+
+É o ponto de partida da Parte 2. Primeiro, com o IMDTravel da tag `BASELINE`, ainda **sem
+nenhuma proteção**, mede-se o estrago que cada falha causa, com números e com o log. Depois,
+a equipe torna o IMDTravel resiliente a estas mesmas falhas, que continuam acontecendo do
+mesmo jeito.
 
 > A injeção de falhas é **instrumento de observação**, não tolerância a falhas.
-> Ela só piora os serviços de dependência. O IMDTravel continua exatamente como na etapa 1:
-> sem timeout, sem retentativa, sem fallback. Tolerar estas falhas é assunto da Parte 2.
+> Ela só piora os serviços de dependência. Nada nela protege o IMDTravel.
 
-Para testar e observar cada falha, veja [Testes da etapa 2](TESTES-FALHAS.md). As decisões
+Para testar e observar cada falha, veja [Testes com falhas](TESTES-FALHAS.md). As decisões
 de projeto e os detalhes de implementação estão no
 [plano da injeção de falhas](docs/injecao-falhas-plano.md).
 
@@ -43,7 +46,8 @@ Cada endpoint tem só dois parâmetros:
    └──┘ (atende normal)        │ sofre a falha, sem novo sorteio
 ```
 
-- `p = 0` desliga a falha. É o padrão: sem nenhuma variável, o sistema é o da etapa 1.
+- `p = 0` desliga a falha. É o padrão: sem nenhuma variável, as dependências se comportam
+  como na Parte 1.
 - `p = 1` com `ttlSec > 0` é falha contínua: a janela reabre na requisição seguinte.
 - Tempo, Omissão e Crash só existem dentro de uma janela e exigem `ttlSec > 0` quando
   `p > 0`. A Resposta aceita `ttlSec = 0`: só a requisição sorteada é afetada.
@@ -96,7 +100,7 @@ serviço no ar: para mudar o cenário, recria-se o container.
 FAULT_SELL_P=0.2 FAULT_SELL_TTL_SEC=5 docker compose up -d --wait airlineshub
 docker compose restart imdtravel
 
-# Volta à etapa 1: recria com os padrões
+# Desliga a falha: recria com os padrões
 docker compose up -d --wait airlineshub
 docker compose restart imdtravel
 ```
@@ -113,8 +117,8 @@ FAULT_SELL: a falha omissao só existe dentro de uma janela; com p > 0, ttlSec p
 ```
 
 Com as imagens do Docker Hub (`docker-compose.hub.yml`), a injeção só existe nas imagens
-publicadas a partir desta etapa. As imagens `baseline` são as da etapa 1 e ignoram as
-variáveis `FAULT_*`.
+publicadas para a Parte 2. As imagens `baseline` são as da Parte 1 e ignoram as variáveis
+`FAULT_*`.
 
 ## 4. Como ver no log
 
@@ -145,4 +149,4 @@ docker compose logs | grep <cid>          # o caminho de uma compra nos quatro s
 | `exchange/.../FalhasExchange.java`, `CorrupcaoTaxa.java` | `/convert` = Resposta e as variantes do `rate` errado |
 | `fidelity/.../FalhasFidelity.java` | `/bonus` = Crash |
 
-Os controllers dos serviços não mudaram em relação à etapa 1.
+Os controllers dos serviços não mudaram em relação à Parte 1.

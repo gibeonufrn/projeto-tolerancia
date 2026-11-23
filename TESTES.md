@@ -11,8 +11,8 @@ Três formas de conferir que o sistema faz o que a
 Todas partem do sistema no ar. Para instalar o ambiente e subir os serviços, veja
 [Como executar](EXECUCAO.md).
 
-Estes são os testes da **etapa 1**, com as dependências sadias. Os testes com falhas
-injetadas são da etapa 2 e estão em [Testes da etapa 2](TESTES-FALHAS.md).
+Estes são os testes da **Parte 1**, com as dependências sadias. Os testes com falhas
+injetadas são da Parte 2 e estão em [Testes com falhas](TESTES-FALHAS.md).
 
 ---
 

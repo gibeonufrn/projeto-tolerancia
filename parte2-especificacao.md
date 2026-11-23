@@ -4,29 +4,32 @@
 
 |                         |                                                                                                                                              |
 |-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| **Objetivo**            | Implementar no IMDTravel as estratégias de tolerância a falhas que o tornam resiliente às falhas que vão acontecer nos serviços de que ele depende. |
-| **O que se implementa** | **Só o IMDTravel.** AirlinesHub, Exchange e Fidelity são os mesmos da Parte 1: caixas-pretas, com o mesmo contrato e com a injeção de falhas da parte 2. |
+| **Objetivo**            | Medir o estrago das falhas injetadas nas dependências e implementar no IMDTravel as estratégias de tolerância a falhas que o tornam resiliente a elas. |
+| **O que se implementa** | **Só o IMDTravel.** AirlinesHub, Exchange e Fidelity são os mesmos da Parte 1: caixas-pretas, com o mesmo contrato, agora com a injeção de falhas ligada (seção 3). |
 | **Equipe**              | A mesma da Parte 1. Mínimo 2, máximo 3 pessoas.                                                                                              |
-| **Pré-requisito**       | A tag BASELINE e as evidências da execução da Parte 1 (o sistema sob as falhas injetadas, sem nenhuma proteção).                                |
-| **Entrega**             | Tag FAULT-TOLERANT no repositório, testes que demonstram cada propriedade e novas evidências.                                   |
+| **Pré-requisito**       | A tag BASELINE da Parte 1.                                                                                                                   |
+| **Entrega**             | Evidências do ponto de partida (a BASELINE sob falha), tag FAULT-TOLERANT, testes que demonstram cada propriedade e as novas evidências. |
 | **Restrição central**   | Nenhum serviço é replicado. Cada serviço continua sendo exatamente um container, e nenhum serviço de dependência é alterado.                 |
 
-> **Segunda de duas partes subsequentes.** Esta parte começa onde a [Parte 1](parte1-especificacao.md) terminou: parte do IMDTravel da tag BASELINE e das medições feitas com as falhas injetadas, e o torna resiliente a essas falhas.
+> **Segunda de duas partes subsequentes.** Esta parte começa onde a [Parte 1](parte1-especificacao.md) terminou, com o IMDTravel da tag BASELINE. Primeiro, as dependências passam a falhar e se mede o estrago; depois, o IMDTravel é tornado resiliente a essas falhas.
 
 **Documentos desta parte**
 
 | Documento | Conteúdo |
 |---|---|
 | Esta especificação | O que o IMDTravel precisa garantir sob falha, as restrições e a entrega. |
-| [Injeção de falhas](../FALHAS.md) | Herdado da Parte 1: o modelo de falhas das dependências, que esta parte passa a tolerar. |
+| [Injeção de falhas](../FALHAS.md) | O modelo de falhas das dependências: os tipos, o que cada um faz, como ligar e como ver no log. |
+| [Testes com falhas](../TESTES-FALHAS.md) | O script `cenario.sh`, que liga cada falha e mede o estrago. |
 
 > **Leitura de apoio.** *Patterns for Fault Tolerant Software* (HANMER, Wiley, 2007), capítulos 5, 6 e 7, vistos nas aulas 07, 08 e 09.
 
 # 1. O que esta parte pede
 
-Na Parte 1, o IMDTravel foi construído sob uma hipótese que toda dependência responde, responde a tempo e responde certo. Na Parte 2, as dependências passaram a falhar de propósito ([Injeção de falhas](../FALHAS.md)).
+Na Parte 1, o IMDTravel foi construído sob uma hipótese que nunca foi dita em voz alta: a de que toda dependência responde, responde a tempo e responde certo. Esta parte derruba essa hipótese e depois conserta o que ela deixou frágil, em dois passos.
 
-**Nesta parte, a equipe deve implementar no IMDTravel as estratégias de tolerância a falhas que tornam o sistema resiliente a essas falhas.** As falhas continuam acontecendo nos outros serviços, do mesmo jeito e com a mesma configuração. O que muda é o IMDTravel.
+**Passo 1 · Ponto de partida: as dependências passam a falhar.** Os três serviços de dependência trazem um modelo de falhas ([Injeção de falhas](../FALHAS.md)), ligado por variáveis de ambiente na subida dos containers (seção 3). Com o IMDTravel da tag BASELINE, ainda sem nenhuma proteção, a equipe liga cada falha e mede o estrago — com o `cenario.sh` ([Testes com falhas](../TESTES-FALHAS.md)) ou com os próprios testes. Essas medições são a linha de comparação do passo 2 e fazem parte da entrega.
+
+**Passo 2 · A tolerância.** **A equipe implementa no IMDTravel as estratégias de tolerância a falhas que tornam o sistema resiliente a essas falhas.** As falhas continuam acontecendo nos outros serviços, do mesmo jeito e com a mesma configuração. O que muda é o IMDTravel.
 
 Esta especificação diz **o que** o IMDTravel precisa garantir (seção 4), e não como. Escolher as estratégias, combiná-las e justificar os parâmetros é o trabalho da equipe. Cada estratégia adotada é nomeada no README, com o padrão do catálogo de onde ela vem, o lugar no código e o teste que a demonstra (seção 6).
 

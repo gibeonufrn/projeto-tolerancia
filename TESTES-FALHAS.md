@@ -1,16 +1,18 @@
-# IMDTravel — Etapa 2: testes com injeção de falhas
+# IMDTravel — Parte 2: testes com injeção de falhas
 
 Como observar cada falha do [modelo de falhas](FALHAS.md) e conferir que ela faz o que
-promete. Os testes da etapa 1 (`curl`, `testes.sh`, testes unitários) estão em
-[Como testar](TESTES.md) e continuam valendo: sem nenhuma variável `FAULT_*`, o sistema é o
-da etapa 1 e o `./testes.sh` passa inteiro.
+promete. É o ponto de partida da [Parte 2](docs/parte2-especificacao.md): rodado com o
+IMDTravel da tag `BASELINE`, mostra o estrago que a tolerância a falhas vai ter de conter.
+
+Os testes da Parte 1 (`curl`, `testes.sh`, testes unitários) estão em [Como testar](TESTES.md)
+e continuam valendo: sem nenhuma variável `FAULT_*`, o sistema se comporta como na Parte 1 e
+o `./testes.sh` passa inteiro.
 
 | Forma | Para quê | Tempo |
 |---|---|---|
 | [`cenario.sh`](#1-o-script-cenariosh) | Ver o estrago de cada falha, comparado com o cenário normal | ~30 s por cenário |
-| [Testes manuais](#2-testes-manuais) | Ligar uma falha à mão e olhar uma requisição por vez | — |
 
-**Requisitos:** os mesmos da etapa 1: `docker compose`, `curl` e `jq` (veja
+**Requisitos:** os mesmos da Parte 1: `docker compose`, `curl` e `jq` (veja
 [o que instalar](EXECUCAO.md#1-o-que-instalar)).
 
 ---
@@ -40,7 +42,7 @@ Para cada cenário, o script:
    cada divergência;
 5. reconstrói pelo log, via `X-Correlation-Id`, o caminho da primeira compra e lista os
    eventos da falha;
-6. desliga a falha e deixa o sistema como na etapa 1.
+6. desliga a falha e deixa o sistema sem falha, como na Parte 1.
 
 ### O que esperar
 
