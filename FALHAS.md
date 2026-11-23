@@ -117,8 +117,9 @@ FAULT_SELL: a falha omissao só existe dentro de uma janela; com p > 0, ttlSec p
 ```
 
 Com as imagens do Docker Hub (`docker-compose.hub.yml`), a injeção só existe nas imagens
-publicadas para a Parte 2. As imagens `baseline` são as da Parte 1 e ignoram as variáveis
-`FAULT_*`.
+publicadas para a Parte 2, com a tag `parte2`:
+`IMAGE_TAG=parte2 docker compose -f docker-compose.hub.yml up -d --wait`. As imagens
+`baseline` são as da Parte 1 e ignoram as variáveis `FAULT_*`.
 
 ## 4. Como ver no log
 
