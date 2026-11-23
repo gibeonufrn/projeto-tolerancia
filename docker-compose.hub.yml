@@ -30,6 +30,12 @@ services:
       CATALOG_SEATS: ${CATALOG_SEATS:-20}
       SELL_MIN_MS: ${SELL_MIN_MS:-300}
       SELL_MAX_MS: ${SELL_MAX_MS:-900}
+      # Injeção de falhas (docs/injecao-falhas-plano.md). Tipos fixos: /flight = Tempo,
+      # /sell = Omissão. _P = probabilidade por requisição; _TTL_SEC = duração da falha.
+      FAULT_FLIGHT_P: ${FAULT_FLIGHT_P:-0}
+      FAULT_FLIGHT_TTL_SEC: ${FAULT_FLIGHT_TTL_SEC:-0}
+      FAULT_SELL_P: ${FAULT_SELL_P:-0}
+      FAULT_SELL_TTL_SEC: ${FAULT_SELL_TTL_SEC:-0}
     healthcheck: *healthcheck
 
   exchange:
@@ -41,12 +47,18 @@ services:
       EXCHANGE_MAX_STEP_PCT: ${EXCHANGE_MAX_STEP_PCT:-0.3}
       EXCHANGE_MIN: ${EXCHANGE_MIN:-5.00}
       EXCHANGE_MAX: ${EXCHANGE_MAX:-6.00}
+      # Injeção de falhas. Tipo fixo: /convert = Resposta.
+      FAULT_CONVERT_P: ${FAULT_CONVERT_P:-0}
+      FAULT_CONVERT_TTL_SEC: ${FAULT_CONVERT_TTL_SEC:-0}
     healthcheck: *healthcheck
 
   fidelity:
     image: gibeonufrn/imdtravel-fidelity:${IMAGE_TAG:-baseline}
     environment:
       PORT: 8080
+      # Injeção de falhas. Tipo fixo: /bonus = Crash.
+      FAULT_BONUS_P: ${FAULT_BONUS_P:-0}
+      FAULT_BONUS_TTL_SEC: ${FAULT_BONUS_TTL_SEC:-0}
     healthcheck: *healthcheck
 
   imdtravel:
