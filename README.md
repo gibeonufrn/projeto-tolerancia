@@ -10,11 +10,11 @@ ordem obrigatória, a três serviços de dependência:
 
 ```
 cliente ──POST /buyTicket──▶ IMDTravel ──1. GET  /flight ──▶ AirlinesHub   preço e assentos
-                                │      ──2. GET  /convert──▶ Exchange      taxa de câmbio
-                                │      ──3. POST /sell   ──▶ AirlinesHub   consome o assento
-                                │      ──4. POST /bonus  ──▶ Fidelity      credita os pontos
-                                ▼
-                     registro local de vendas (GET /sales)
+                                       ──2. GET  /convert──▶ Exchange      taxa de câmbio
+                                       ──3. POST /sell   ──▶ AirlinesHub   consome o assento
+                                       ──4. POST /bonus  ──▶ Fidelity      credita os pontos
+                                
+
 ```
 
 | Serviço | Papel |
