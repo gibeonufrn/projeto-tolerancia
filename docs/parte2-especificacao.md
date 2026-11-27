@@ -76,13 +76,11 @@ O sistema é o mesmo da Parte 1, com o mesmo contrato entre os serviços e as qu
 
 ```
 cliente ──POST /buyTicket──▶ IMDTravel ──1. GET  /flight ──▶ AirlinesHub   falha: Tempo
-                                │      ──2. GET  /convert──▶ Exchange      falha: Resposta
-                                │      ──3. POST /sell   ──▶ AirlinesHub   falha: Omissão
-                                │      ──4. POST /bonus  ──▶ Fidelity      falha: Crash
-                                ▼
-                     registro local de vendas (GET /sales) · GET /status (novo)
+                                       ──2. GET  /convert──▶ Exchange      falha: Resposta
+                                       ──3. POST /sell   ──▶ AirlinesHub   falha: Omissão
+                                       ──4. POST /bonus  ──▶ Fidelity      falha: Crash
+                                
 ```
-
 ## 3.1 O modelo de falhas
 
 As falhas são descritas em [Injeção de falhas](../FALHAS.md). Cada endpoint alvo tem um tipo fixo; só a probabilidade `p` e a duração `ttlSec` da janela de falha mudam, pelas variáveis `FAULT_<ENDPOINT>_P` e `FAULT_<ENDPOINT>_TTL_SEC`.
@@ -111,7 +109,7 @@ As propriedades abaixo são obrigatórias. Cada uma precisa ser demonstrada por 
 | **P1**  | Prazo total                             | Nenhuma compra responde depois de `5000ms`, contado da chegada da requisição 0. Vale também com uma dependência pausada.                                         |
 | **P2**  | Nenhum valor inválido                   | Nenhuma venda é gravada em `/sales` nem devolvida ao cliente com taxa fora de [5.0 , 6.0], não numérica, ou com valor derivado dela.                           |
 | **P3**  | No máximo um assento por compra         | Uma requisição de compra consome no máximo um assento no AirlinesHub, aconteça o que acontecer com as respostas.                                                         |
-| **P4**  | Resposta honesta                        | 201 só quando a venda foi confirmada pelo AirlinesHub. Quando o IMDTravel não puder saber se a venda aconteceu, a resposta diz isso (seção 5). Compra concluída em condição degradada declara a degradação. |
+| **P4**  | Resposta honesta                        | 201 só quando a venda foi confirmada pelo AirlinesHub. Quando o IMDTravel não puder saber se a venda aconteceu, a resposta deve ser 200. Compra concluída em condição degradada declara a degradação. Nos dois casos, se aplicam novos campos à resposta da Compra **(seção 5)**|
 | **P5**  | O Fidelity não é essencial              | Falha do Fidelity nunca faz a compra falhar. Todo bônus devido é creditado, exatamente uma vez, depois que o Fidelity volta.                                               |
 | **P6**  | Compra possível sob Tempo e Resposta    | Com o `/flight` lento ou o `/convert` errado, a compra continua possível. Dado usado numa compra degradada não pode ser mais velho que a idade máxima declarada pela equipe. |
 | **P7**  | Falha rápida e volta sozinha            | Com uma dependência falhando de forma persistente, as compras afetadas respondem bem antes do prazo total e o IMDTravel deixa de sobrecarregar a dependência. Quando ela volta, o sistema volta ao normal sem intervenção. |

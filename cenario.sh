@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # cenario.sh — observa o IMDTravel num cenário normal ou sob uma das quatro falhas
-# do modelo (docs/injecao-falhas-plano.md).
+# do modelo.
 #
 # Uso:
 #   ./cenario.sh normal                          sem falha nenhuma

@@ -131,4 +131,3 @@ As imagens `baseline` são as da Parte 1 e **não** têm a injeção: com elas, 
 | [Especificação da Parte 2](docs/parte2-especificacao.md) | O ponto de partida, o que o IMDTravel precisa garantir sob falha, as restrições e a entrega. **É a fonte da verdade.** |
 | [Injeção de falhas](FALHAS.md) | O modelo de falhas: os tipos, o que cada um faz, como ligar e como ver no log. |
 | [Testes com falhas](TESTES-FALHAS.md) | O script `cenario.sh`: liga cada falha, faz compras e mostra o estrago. |
-| [Plano da injeção de falhas](docs/injecao-falhas-plano.md) | As decisões de projeto e os detalhes de implementação da injeção. |

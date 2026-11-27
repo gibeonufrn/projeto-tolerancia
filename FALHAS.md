@@ -13,9 +13,7 @@ mesmo jeito.
 > A injeção de falhas é **instrumento de observação**, não tolerância a falhas.
 > Ela só piora os serviços de dependência. Nada nela protege o IMDTravel.
 
-Para testar e observar cada falha, veja [Testes com falhas](TESTES-FALHAS.md). As decisões
-de projeto e os detalhes de implementação estão no
-[plano da injeção de falhas](docs/injecao-falhas-plano.md).
+Para testar e observar cada falha, veja [Testes com falhas](TESTES-FALHAS.md).
 
 ---
 

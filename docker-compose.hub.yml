@@ -34,7 +34,7 @@ services:
       CATALOG_SEATS: ${CATALOG_SEATS:-20}
       SELL_MIN_MS: ${SELL_MIN_MS:-300}
       SELL_MAX_MS: ${SELL_MAX_MS:-900}
-      # Injeção de falhas (docs/injecao-falhas-plano.md). Tipos fixos: /flight = Tempo,
+      # Injeção de falhas. Tipos fixos: /flight = Tempo,
       # /sell = Omissão. _P = probabilidade por requisição; _TTL_SEC = duração da falha.
       FAULT_FLIGHT_P: ${FAULT_FLIGHT_P:-0}
       FAULT_FLIGHT_TTL_SEC: ${FAULT_FLIGHT_TTL_SEC:-0}
